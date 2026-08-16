@@ -1500,6 +1500,23 @@ Blueprint در ۲۰۲۶-۰۸-۱۶ تأیید شد و در همان تاریخ ب
 | 3 — `research/security-review.md` | ✅ تأیید شد |
 | 4 — `design/project-map.md` | ✅ تأیید شد |
 | 5 — Skill `project-understanding` | ✅ ساخته شد |
-| 6 — Evaluation | ⛔ شروع نشده |
+| 6 — Evaluation | 🔄 اولین دور انجام شد |
 
 هیچ Skillی ساخته نمی‌شود تا Research مربوطه‌اش تأیید شود.
+
+### اولین دور Evaluation — `project-understanding`
+
+مقایسهٔ پایه (بخش [9.4](#94-مقایسهٔ-پایه-و-capability-preservation)) روی یک
+repository واقعی، یک بار انجام شد:
+
+- **بهتر از Claude بدون Skill** در: شواهد، مدیریت `unknown`، مرزهای اعتماد،
+  زمینهٔ authentication/authorization، و صداقتِ پوشش.
+- **Capability Preservation:** مشکل مهمی دیده نشد.
+- **دروازهٔ مطلق (۹.۲):** موردی از جعل file / line / snippet گزارش نشد.
+- **مشکل پیداشده:** Project Map بیش‌ازحد مفصل بود — برای یک repository کوچک، در
+  بخش‌هایی از «نقشه» به «گزارش repository» نزدیک شد. اطلاعات درست بودند، ولی
+  برای یک نقشه ارزش کافی نداشتند.
+- **اقدام:** یک iteration محدود روی `skills/project-understanding/SKILL.md` برای
+  فشرده‌تر کردن نقشه، بدون دست زدن به قواعد شواهد و `unknown`.
+
+تست دوم روی یک repository متفاوت هنوز انجام نشده است.

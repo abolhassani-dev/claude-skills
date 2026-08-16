@@ -21,11 +21,80 @@ not a copy of the repository
 You are **not** producing:
 
 - a list of problems — you report no findings, no severities, no recommendations
+- a repository report — a document that walks through everything the repository
+  contains
 - onboarding documentation for a new teammate
 - a claim to *understand* the project
 
 The last one matters. A program's intent cannot be recovered from its text alone.
 You are building a map, and the map should never pretend to be more than that.
+
+## The inclusion test
+
+Compactness is not a style preference. Irrelevant context measurably degrades
+reasoning, so a bloated map recreates the problem it exists to solve.
+
+Before you write any item into the map, ask one question:
+
+```text
+If I removed this, could the next reviewer misunderstand the project
+or reach a different conclusion?
+```
+
+`yes` → keep it. `no` → drop it, or fold it into a group.
+
+Apply this to **every** item, including the ones the coverage floor below asks for.
+Covering a topic can be a single line.
+
+**There is no numeric limit** — not on words, lines, or tokens. Size follows the
+repository's complexity, so a small repository should naturally produce a short map.
+The goal is not the shortest possible document; it is maximum useful context with
+minimum unnecessary detail. A human should be able to understand the shape of the
+project from it in a few minutes.
+
+### Compress repetition, preserve exceptions
+
+Group similar things instead of listing them one by one.
+
+```markdown
+- **8 internal routes share one client-side guard** · `verified`
+  `src/components/guard.tsx` · `getSession()` → `router.replace("/login/")`
+- **Exception: `/login` is public** · `verified`
+  `src/app/login/page.tsx` · renders without the guard
+```
+
+**Never compress away exceptions.** If one item in a group behaves differently, it
+gets its own entry, in full. The exception is usually the most valuable line in the
+map: *every table is behind RLS except `product-images`, which is publicly readable*
+is worth more than the eight tables that behave identically.
+
+Never compress away important relationships, sensitive data paths, trust
+boundaries, or structure either.
+
+### Detail on demand
+
+The map carries what a reviewer needs to **orient** — not everything a reviewer
+might one day want to know.
+
+```text
+Global map   → compact
+Reviewer     → opens the relevant file when deeper detail is needed
+```
+
+So do not pre-explain implementation detail. Spend words on a detail only when it
+changes the architecture, explains important system behaviour, is an exception, is
+a trust boundary or a sensitive flow, or would change the next reviewer's
+conclusion.
+
+For a large repository the same rule applies at a larger scale: a compact global
+map, plus targeted detail only where it is actually needed. If the repository is
+too large to inspect fully, say so in coverage — honestly and specifically.
+
+### Code quality is not part of the map
+
+Unused imports, dead helpers, naming, formatting, and minor duplication do not
+belong here. They are work for later reviewers. Mention such a thing only when it
+genuinely changes how the architecture or the system's behaviour is understood.
 
 ## How to work
 
@@ -40,8 +109,11 @@ what you find, form a hypothesis, chase it, abandon it when it does not hold, an
 come back to it later if something else points that way.
 
 If you discover a pattern, dependency, or relationship that matters for
-understanding this project and is not listed below, **investigate it and record
-it**. Do not ignore useful evidence merely because this skill did not anticipate it.
+understanding this project and is not listed below, **investigate it** — and record
+it if it passes the inclusion test. Do not ignore useful evidence merely because
+this skill did not anticipate it. Investigating widely and reporting narrowly is
+the intended shape: what you learn tells you where to look next even when it never
+reaches the map.
 
 What is *not* free is the order of evidence: you cannot interpret imports before
 you know what the manifest declares. Data dependencies are real even when
@@ -63,6 +135,10 @@ requires evidence, or an honest confidence level.
 
 These are the things the map should not silently omit. They are a **floor, not a
 ceiling**. Add anything else that matters for this particular project.
+
+It is a floor of **topics, not of detail**. Each topic must still earn its length
+through the inclusion test — for a small project, most of these are one or two
+lines each, and some are a single `unknown`.
 
 **A — What the project is**
 
@@ -116,6 +192,20 @@ The anchor must be copied exactly from the file. Never paraphrase it.
 
 Never invent a file, a line, or a snippet. Not as an example, not for
 illustration, not approximately.
+
+**Evidence gets shorter, never dropped.** The evidence requirement is absolute; a
+paragraph explaining each piece of evidence is not. File plus anchor *is* the
+evidence, and one line is usually enough:
+
+```markdown
+- **Internal routes are guarded client-side** · `verified`
+  `src/components/guard.tsx` · `getSession()` → `router.replace("/login/")`
+```
+
+Add a note under it only when the note itself would change the reader's
+conclusion — an exception, a boundary, or where you looked for something you could
+not find. Never trade evidence for brevity: the way to shorten the map is to carry
+fewer claims, not to carry claims with weaker support.
 
 ### Confidence
 
@@ -174,34 +264,6 @@ configuration, deployment-level controls, and whether a given entry point is
 genuinely reachable from the internet. Record what the code shows, record what you
 inferred, and record what is simply missing — as three separate things.
 
-## Keeping the map compact
-
-The map is compact by default. This is not a style preference: irrelevant context
-measurably degrades reasoning, so a bloated map recreates the problem it exists to
-solve.
-
-**Compress repetition.** Group similar things instead of listing them one by one.
-
-```markdown
-### Transfer endpoints
-- **18 routes, all requiring authentication** · `verified`
-  `transfers/urls.py` · `router.register(r'transfers', TransferViewSet)`
-- **Sensitive operations in this group:** create · transfer ownership · cancel
-```
-
-**Never compress away:**
-
-- **exceptions** — if one of those 18 routes behaves differently, it gets its own
-  entry, in full. The exception is usually the most valuable line in the map.
-- important relationships, sensitive paths, trust boundaries, structure
-
-**The test:** if removing an item would lead the next reviewer to a *different*
-conclusion, keep it. If removing it only makes the document shorter, drop it.
-
-For a large repository: a compact global map, plus targeted detail only where it
-is actually needed. If the repository is too large to inspect fully, say so in
-coverage — honestly and specifically.
-
 ## Output
 
 A single Markdown document with a short header:
@@ -244,8 +306,11 @@ Each claim takes this shape:
   <optional note, or where you looked if unknown>
 ```
 
-If a section genuinely does not apply to this project, say so briefly rather than
-filling it with empty text.
+The note on the third line is optional, and for most claims it is left out.
+
+Keep the section skeleton, but do not treat a heading as a quota: a section that
+needs one line gets one line. If a section genuinely does not apply to this
+project, say so briefly rather than filling it with empty text.
 
 **Language:** write the map in Persian, keeping file paths, code, framework names,
 and the four confidence values in their original form.

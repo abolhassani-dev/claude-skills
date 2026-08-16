@@ -44,8 +44,18 @@ repository پروژه‌ات را در **Claude Desktop** در دسترس Claude
 | تحقیق `project-understanding` | ✅ تأیید شد |
 | تحقیق `security-review` | ✅ تأیید شد |
 | طراحی Project Map | ✅ نهایی |
-| Skill `project-understanding` | ✅ ساخته شد — ارزیابی نشده |
+| Skill `project-understanding` | ✅ ساخته شد — اولین ارزیابی انجام شد |
 | بقیهٔ Skillها | ⛔ شروع نشده |
+
+**اولین ارزیابی `project-understanding`** — مقایسهٔ پایه با Claude بدون Skill:
+
+- Skill در شواهد، مدیریت `unknown`، مرزهای اعتماد، زمینهٔ مجوزدهی و صداقتِ پوشش
+  آشکارا بهتر بود.
+- Capability Preservation مشکل مهمی نشان نداد.
+- اولین مشکلِ پیداشده: **Project Map بیش‌ازحد مفصل** — در بخش‌هایی از «نقشه» به
+  «گزارش repository» نزدیک شده بود.
+- iteration بعدی دقیقاً برای همین انجام شد. تست دوم روی یک repository دیگر هنوز
+  انجام نشده.
 
 ---
 
