@@ -42,8 +42,10 @@ repository پروژه‌ات را در **Claude Desktop** در دسترس Claude
 | طراحی (`BLUEPRINT.md`) | ✅ نهایی |
 | قراردادهای مشترک | ✅ آماده |
 | تحقیق `project-understanding` | ✅ تأیید شد |
-| تحقیق `security-review` | ⏳ منتظر بازبینی |
-| ساخت | ⛔ شروع نشده |
+| تحقیق `security-review` | ✅ تأیید شد |
+| طراحی Project Map | ✅ نهایی |
+| Skill `project-understanding` | ✅ ساخته شد — ارزیابی نشده |
+| بقیهٔ Skillها | ⛔ شروع نشده |
 
 ---
 

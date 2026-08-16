@@ -1497,7 +1497,9 @@ Blueprint در ۲۰۲۶-۰۸-۱۶ تأیید شد و در همان تاریخ ب
 | 1 — اسکلت مخزن و `shared/` | ✅ تأیید شد |
 | 2 — `research/project-understanding.md` | ✅ تأیید شد |
 | — هماهنگی Desktop-First | ⏳ منتظر تأیید |
-| 3 — `research/security-review.md` | ⏳ منتظر بازبینی |
-| 4 — طراحی `project-understanding` | ⛔ شروع نشده |
+| 3 — `research/security-review.md` | ✅ تأیید شد |
+| 4 — `design/project-map.md` | ✅ تأیید شد |
+| 5 — Skill `project-understanding` | ✅ ساخته شد |
+| 6 — Evaluation | ⛔ شروع نشده |
 
 هیچ Skillی ساخته نمی‌شود تا Research مربوطه‌اش تأیید شود.
