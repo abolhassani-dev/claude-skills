@@ -54,14 +54,8 @@ project from it in a few minutes.
 
 ### Compress repetition, preserve exceptions
 
-Group similar things instead of listing them one by one.
-
-```markdown
-- **12 admin routes, all behind the same role check** · `verified`
-  `<routes file>` · `<the shared check>`
-- **Exception: one of them has no role check** · `verified`
-  `<handler file>` · `<what runs instead>`
-```
+Group similar things instead of listing them one by one — one claim for the group,
+then the exception on its own. The reference shows the shape.
 
 **Never compress away exceptions.** If one item in a group behaves differently, it
 gets its own entry, in full. The exception is usually the most valuable line in the
@@ -195,14 +189,9 @@ illustration, not approximately.
 
 **Evidence gets shorter, never dropped.** The evidence requirement is absolute; a
 paragraph explaining each piece of evidence is not. File plus anchor *is* the
-evidence, and one line is usually enough:
+evidence, and one line is usually enough — the reference shows the exact shape.
 
-```markdown
-- **Protected pages check the session before rendering** · `verified`
-  `<guard component>` · `<the session lookup and redirect>`
-```
-
-Add a note under it only when the note itself would change the reader's
+Add a note under a claim only when the note itself would change the reader's
 conclusion — an exception, a boundary, or where you looked for something you could
 not find. Never trade evidence for brevity: the way to shorten the map is to carry
 fewer claims, not to carry claims with weaker support.
@@ -244,12 +233,8 @@ When something cannot be determined:
 - say where you looked
 - say what would be needed to confirm it
 
-```markdown
-- **Production rate limiting** · `unknown`
-  Looked in `src/middleware/` and the route configuration; found no
-  application-level control. It may exist at gateway level, which is outside
-  this repository.
-```
+An `unknown` claim carries the same shape as any other, with the note recording where
+you searched instead of an anchor. The reference shows it.
 
 "I did not find it" and "it does not exist" are different statements. Never let
 the first become the second.
@@ -266,84 +251,28 @@ inferred, and record what is simply missing — as three separate things.
 
 ## Output
 
-A single Markdown document with a short header:
+The Project Map is a single Markdown document, written to `.audit/project-map.md` when
+the environment allows and presented in the conversation when it does not — its validity
+does not depend on being a file.
 
-```markdown
----
-repo: <name>
-repo_version: <commit or version identifier, or `unknown`>
-generated_at: <YYYY-MM-DD>
----
+**Before finalizing the map, read `references/output-contract.md`.** It holds the
+document header, the section skeleton, the shape every claim takes, the language rule,
+and the presentation rules for both the map and the summary. Do not produce the map from
+memory or from a layout you invented.
 
-# Project Map — <name>
+Two things worth knowing in advance: `repo_version` is `unknown` when no identifier is
+available and is **never fabricated**, and the map is written in Persian, keeping file
+paths, code, framework names and the four confidence values in their original form.
 
-## A. پروژه چیست
-### A1 — هویت و هدف
-### A2 — پشته و فریم‌ورک‌ها
-### A3 — ساختار و اجزا
-
-## B. چه چیزی وارد و خارج می‌شود
-### B1 — نقاط ورود
-### B2 — ذخیره‌سازی داده
-### B3 — سرویس‌های بیرونی
-### B4 — داده‌های حساس
-
-## C. چه کسی چه کاری می‌تواند بکند
-### C1 — احراز هویت
-### C2 — نقش‌ها و مجوزدهی
-### C3 — مرزهای اعتماد
-
-## D. چه چیزی بیرون از دید است
-### D1 — محیط و کنترل‌های بیرونی
-### D2 — پوشش و محدودیت‌ها
-```
-
-Each claim takes this shape:
-
-```markdown
-- **<the claim>** · `<confidence>`
-  <file> · `<anchor>`
-  <optional note, or where you looked if unknown>
-```
-
-The note on the third line is optional, and for most claims it is left out.
-
-Keep the section skeleton, but do not treat a heading as a quota: a section that
-needs one line gets one line. If a section genuinely does not apply to this
-project, say so briefly rather than filling it with empty text.
-
-**Language:** write the map in Persian, keeping file paths, code, framework names,
-and the four confidence values in their original form.
-
-**If `repo_version` is not available, write `unknown`.** Never fabricate an
-identifier.
-
-**Storage:** the map is logically one Markdown document. Write it to
-`.audit/project-map.md` if the environment allows it. If it does not, present the
-same structure in the conversation — its validity does not depend on being a file.
-
-**Presentation:** the map and the summary are read by a person, so keep them
-scannable. Short paragraphs, bullets for sets of items with at most one level of
-nesting, backticks for every file path and symbol, bold only where it genuinely
-matters, and code blocks only for code — never as a decorative box around prose.
-A wall of text is a defect even when every claim in it is correct.
+Keep the map scannable — short paragraphs, bullets for sets with at most one level of
+nesting, backticks for paths and symbols, restrained emphasis, and code blocks only for
+code. A wall of text is a defect even when every claim in it is correct.
 
 ## Tell the user, simply
 
-After the map, give the user a short plain-language summary. A few lines. They
-should not need to understand the map's internal structure.
+After the map, give the user a short plain-language summary in the shape the reference
+defines. A few lines. They should not need to understand the map's internal structure.
 
-```text
-پروژه را بررسی کردم.
-
-- Backend: Django · Frontend: React · Database: PostgreSQL
-- ۳ نقش کاربری و ۲ سرویس خارجی پیدا شد
-- ۲۳ مسیر API، که ۴ تای آن‌ها بدون احراز هویت در دسترس‌اند
-- چند مورد مربوط به production قابل تأیید نبود
-
-Project Map آماده است.
-```
-
-If something important could not be determined, say that here too — briefly, in
-one line. It is the single most useful thing the user can know before asking for a
+If something important could not be determined, say that here too — briefly, in one
+line. It is the single most useful thing the user can know before asking for a
 specialist review.
