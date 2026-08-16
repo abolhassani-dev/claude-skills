@@ -1501,24 +1501,29 @@ Blueprint در ۲۰۲۶-۰۸-۱۶ تأیید شد و در همان تاریخ ب
 | — هماهنگی Desktop-First | ⏳ منتظر تأیید |
 | 3 — `research/security-review.md` | ✅ تأیید شد |
 | 4 — `design/project-map.md` | ✅ تأیید شد |
-| 5 — Skill `project-understanding` | ✅ ساخته شد |
-| 6 — Evaluation | 🔄 اولین دور انجام شد |
+| 5 — Skill `project-understanding` | ✅ **PASSED** — روی دو repository ارزیابی شد |
+| 6 — Skill `security-review` | 🔨 **ساخته شد — ارزیابی نشده** |
+| 7 — Skill `remediation-planner` | ⛔ شروع نشده |
 
 هیچ Skillی ساخته نمی‌شود تا Research مربوطه‌اش تأیید شود.
 
-### اولین دور Evaluation — `project-understanding`
+### Evaluation — `project-understanding` · PASSED
 
-مقایسهٔ پایه (بخش [9.4](#94-مقایسهٔ-پایه-و-capability-preservation)) روی یک
-repository واقعی، یک بار انجام شد:
+مقایسهٔ پایه (بخش [9.4](#94-مقایسهٔ-پایه-و-capability-preservation)) روی دو
+repository واقعی انجام شد:
 
 - **بهتر از Claude بدون Skill** در: شواهد، مدیریت `unknown`، مرزهای اعتماد،
   زمینهٔ authentication/authorization، و صداقتِ پوشش.
 - **Capability Preservation:** مشکل مهمی دیده نشد.
 - **دروازهٔ مطلق (۹.۲):** موردی از جعل file / line / snippet گزارش نشد.
-- **مشکل پیداشده:** Project Map بیش‌ازحد مفصل بود — برای یک repository کوچک، در
-  بخش‌هایی از «نقشه» به «گزارش repository» نزدیک شد. اطلاعات درست بودند، ولی
-  برای یک نقشه ارزش کافی نداشتند.
-- **اقدام:** یک iteration محدود روی `skills/project-understanding/SKILL.md` برای
-  فشرده‌تر کردن نقشه، بدون دست زدن به قواعد شواهد و `unknown`.
+- **مشکل پیداشده:** Project Map بیش‌ازحد مفصل بود — در بخش‌هایی از «نقشه» به
+  «گزارش repository» نزدیک شد. با یک iteration فشرده‌سازی اصلاح شد.
 
-تست دوم روی یک repository متفاوت هنوز انجام نشده است.
+### Evaluation — `security-review` · انجام نشده
+
+Skill ساخته شده و روی هیچ repositoryی اجرا نشده است. طبق بخش
+[14](#14-definition-of-done)، تا وقتی از Evaluation رد نشده، خروجی‌اش تأییدشده
+نیست.
+
+فرضیهٔ اصلی که باید در همین ارزیابی آزموده شود، `U6` تحقیق است: آیا مرحلهٔ
+جداگانهٔ candidate → rejection واقعاً بیش‌گزارشی را کم می‌کند.
