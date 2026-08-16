@@ -1,9 +1,34 @@
-# Output Contract — security-review
+# Output and Presentation Contract — security-review
 
 Read this before finalizing findings. It carries the exact document shape, the
-severity rubric, the confidence caps, and the validation gate.
+severity rubric, the confidence caps, the validation gate, and the presentation rules
+for anything the user reads.
 
 It does not change any rule in `SKILL.md`; it is the detail behind them.
+
+---
+
+## 0. Hard gate
+
+These are not defaults to adapt. If you cannot meet them, **stop and say why** — never
+invent a fallback format.
+
+- The artifact is exactly `.audit/security-findings.json`, or the same JSON in the
+  conversation when the environment cannot write files
+- Valid JSON, matching the shape in section 1
+- **No `.audit/security-review.md`. No separate Markdown report.** Ever
+- `confidence` is exactly one of `verified`, `inferred`, `unverified` — nothing else
+- **No numeric confidence.** No `9/10`, no percentages, no scores, no invented
+  thresholds such as "dropped everything below 8". Confidence is a category, not a
+  number, and there is no cut-off to compute
+- `id` is `SEC-###`
+- Every schema field present, none renamed or added
+- Every `snippet` an exact copy — **no `...`, no elision, no paraphrase**
+- Every cited file and line re-opened and re-read before the item is written
+- `coverage` and `checked_and_clean` valid per sections 2 and 5
+
+A report that is well reasoned but off-contract has failed. The contract is what makes
+findings comparable and mergeable across reviews.
 
 ---
 
@@ -232,42 +257,66 @@ report look substantial — that is a failure, not a success.
 
 ## 6. The user summary
 
-After the document, a short Persian summary — ten lines at most. It does not replace
-the document, but it is enough for the user.
+After the document, a short Persian summary. It does not replace the document — the
+artifact holds the detail, the summary exists so the user can decide quickly. Do not
+restate the report.
 
-```text
-بررسی امنیتی تمام شد.
+Use this shape:
 
-- ۱ مورد critical · ۲ مورد high · ۴ مورد medium · ۱ مورد low
-- ۲ مورد نیازمند بررسی بیشتر (unverified)
+```markdown
+## نتیجه
 
-مهم‌ترین:
-  SEC-001 (critical) — <یک جمله> · <file>:<line>
+۴ Finding پیدا شد:
 
-پوشش: <n> فایل در <مسیرها>
-بررسی نشد: <چه چیزی و چرا>
+- High: 1
+- Medium: 3
+
+### مهم‌ترین مورد
+
+`SEC-001` — <یک جملهٔ کوتاه>
+
+Severity: High
+Confidence: Inferred
+Location: `<file>:<line>`
+
+یک یا دو جملهٔ توضیح.
+
+### پوشش
+
+بررسی شد:
+- Authentication
+- Authorization
+- Business logic
+
+بررسی نشد:
+- Production firewall
+- Real environment configuration
 ```
 
-When nothing was found, say so explicitly and show what you checked:
-
-```text
-هیچ finding قابل اقدامی پیدا نشد.
-
-بررسی و سالم بود:
-  <حوزه>    <file>:<lines>
-  <حوزه>    <file>:<lines>
-
-پوشش: <n> فایل
-بررسی نشد: <چه چیزی و چرا>
-```
+When nothing was found, keep the same shape and say so plainly under `## نتیجه`, then
+list what you checked and found clean with its file and lines.
 
 Never write that the project is secure or that no vulnerabilities exist. The honest
-forms are:
+forms are *در محدودهٔ بررسی‌شده، finding قابل اقدام دیگری پیدا نشد* and *بخش `<X>`
+بررسی شد و در محدودهٔ شواهد موجود، finding تأییدشده‌ای نداشت*.
 
-```text
-در محدودهٔ بررسی‌شده، finding قابل اقدام دیگری پیدا نشد.
-```
+## 7. Presentation rules
 
-```text
-بخش <X> بررسی شد و در محدودهٔ شواهد موجود، finding تأییدشده‌ای نداشت.
-```
+These apply to the summary and to anything else the user reads. They are the runtime
+subset of the project's shared presentation contract.
+
+- Persian prose; keep technical terms in English where translating costs precision —
+  authentication, authorization, middleware, finding, repository, Project Map
+- File paths, symbols, routes, fields and literal values always in backticks
+- Short paragraphs, two to four lines, one idea each. No wall of text
+- Bullets for sets of items; at most one level of nesting
+- Bold only for what is genuinely important
+- Code blocks only for code, JSON, commands, schema or a small diagram — never as a
+  decorative box around prose
+- Tables only when a comparison is genuinely clearer as a grid; no long prose in cells
+- At most three heading levels, and no heading for two sentences
+- Blank lines between independent sections
+
+Inside the JSON, the same discipline applies to the text fields: `title` is one short
+sentence, and `explanation`, `impact`, `verification` and `suggested_fix` say what is
+needed and stop. No essays in JSON fields.

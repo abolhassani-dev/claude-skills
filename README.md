@@ -45,7 +45,7 @@ repository پروژه‌ات را در **Claude Desktop** در دسترس Claude
 | تحقیق `security-review` | ✅ تأیید شد |
 | طراحی Project Map | ✅ نهایی |
 | Skill `project-understanding` | ✅ **PASSED** — روی دو repository واقعی ارزیابی شد |
-| Skill `security-review` | 🔨 **ساخته شد — هنوز ارزیابی نشده** |
+| Skill `security-review` | 🔄 **دور اول ارزیابی FAIL — اصلاح شد، منتظر دور دوم** |
 | بقیهٔ Skillها | ⛔ شروع نشده |
 
 **ارزیابی `project-understanding`** — مقایسهٔ پایه با Claude بدون Skill، روی دو
@@ -57,8 +57,17 @@ repository واقعی:
 - تنها مشکلِ پیداشده: Project Map بیش‌ازحد مفصل بود — با یک iteration فشرده‌سازی
   اصلاح شد.
 
-**`security-review`** ساخته شده ولی **هنوز روی هیچ repositoryی اجرا نشده**.
-تا وقتی ارزیابی نشده، خروجی‌اش تأییدشده نیست.
+**اولین ارزیابی `security-review`** — روی یک repository واقعی:
+
+- استدلال امنیتی قوی بود و چند finding ظاهراً معتبر تولید شد
+- مدل candidate → rejection کار کرد
+- ولی **قرارداد خروجی رعایت نشد** و **کیفیت ارائه پایین بود** — گزارش Markdown
+  به‌جای JSON، confidence عددی، و متن سخت‌خوان
+- اصلاح اعمال شد و **ارزیابی دوم لازم است**
+
+از این ارزیابی یک قرارداد مشترک تازه بیرون آمد:
+[`shared/presentation-contract.md`](shared/presentation-contract.md).
+کیفیت ارائه از این پس بخشی از Evaluation رسمی است.
 
 ---
 

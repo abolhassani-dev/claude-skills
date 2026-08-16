@@ -322,6 +322,12 @@ identifier.
 `.audit/project-map.md` if the environment allows it. If it does not, present the
 same structure in the conversation — its validity does not depend on being a file.
 
+**Presentation:** the map and the summary are read by a person, so keep them
+scannable. Short paragraphs, bullets for sets of items with at most one level of
+nesting, backticks for every file path and symbol, bold only where it genuinely
+matters, and code blocks only for code — never as a decorative box around prose.
+A wall of text is a defect even when every claim in it is correct.
+
 ## Tell the user, simply
 
 After the map, give the user a short plain-language summary. A few lines. They
