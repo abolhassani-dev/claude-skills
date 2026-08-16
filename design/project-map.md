@@ -1,6 +1,6 @@
 # Design — Project Map
 
-> **وضعیت:** پیش‌نویس طراحی، منتظر تأیید
+> **وضعیت: FINAL — تأییدشده**
 >
 > **ورودی‌ها:** `research/project-understanding.md` و `research/security-review.md` — هر دو تأییدشده
 >

@@ -57,16 +57,16 @@ project from it in a few minutes.
 Group similar things instead of listing them one by one.
 
 ```markdown
-- **8 internal routes share one client-side guard** · `verified`
-  `src/components/guard.tsx` · `getSession()` → `router.replace("/login/")`
-- **Exception: `/login` is public** · `verified`
-  `src/app/login/page.tsx` · renders without the guard
+- **12 admin routes, all behind the same role check** · `verified`
+  `<routes file>` · `<the shared check>`
+- **Exception: one of them has no role check** · `verified`
+  `<handler file>` · `<what runs instead>`
 ```
 
 **Never compress away exceptions.** If one item in a group behaves differently, it
 gets its own entry, in full. The exception is usually the most valuable line in the
-map: *every table is behind RLS except `product-images`, which is publicly readable*
-is worth more than the eight tables that behave identically.
+map: *every data store is access-controlled except one, which is publicly readable*
+is worth more than the stores that behave identically.
 
 Never compress away important relationships, sensitive data paths, trust
 boundaries, or structure either.
@@ -198,8 +198,8 @@ paragraph explaining each piece of evidence is not. File plus anchor *is* the
 evidence, and one line is usually enough:
 
 ```markdown
-- **Internal routes are guarded client-side** · `verified`
-  `src/components/guard.tsx` · `getSession()` → `router.replace("/login/")`
+- **Protected pages check the session before rendering** · `verified`
+  `<guard component>` · `<the session lookup and redirect>`
 ```
 
 Add a note under it only when the note itself would change the reader's

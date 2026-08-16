@@ -146,7 +146,9 @@ Trust Model · Research · References · Evidence Contracts
 
 **نیاز:** این Skillها باید در Claude Desktop قابل استفاده باشند.
 
-**وضعیت:** ❓ **نامعلوم و مهم‌ترین سؤال باز.** روش توزیع در Desktop باید بررسی شود.
+**وضعیت:** ✅ **حل شد — عملاً اثبات شد.** یک Custom Skill به‌صورت یک فایل ZIP شامل
+پوشهٔ Skill و `SKILL.md` در Claude Desktop نصب و اجرا شد. اولین دور Evaluation روی
+همین مسیر انجام شد، پس این دیگر یک فرض نیست.
 
 **اثر بر طراحی:** هیچ چیزی در این سند نباید به روش نصب خاصی وابسته باشد.
 بخش [Internal / Developer Setup](#internal--developer-setup) فقط برای توسعهٔ خودِ
